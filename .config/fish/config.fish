@@ -3,3 +3,6 @@ if status is-interactive
 end
 
 starship init fish | source
+alias ls=lsd
+set -g fish_greeting ""
+# export STARSHIP_CONFIG="~/.config/starship/starship.toml"

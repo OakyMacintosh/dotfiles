@@ -1,4 +1,4 @@
-include cappuccin-macchiato
+include ./cappuccin-macchiato
 
 # Default config for sway
 #
@@ -8,6 +8,34 @@ include cappuccin-macchiato
 
 ### Variables
 #
+
+set $rosewater #f4dbd6
+set $flamingo #f0c6c6
+set $pink #f5bde6
+set $mauve #c6a0f6
+set $red #ed8796
+set $maroon #ee99a0
+set $peach #f5a97f
+set $yellow #eed49f
+set $green #a6da95
+set $teal #8bd5ca
+set $sky #91d7e3
+set $sapphire #7dc4e4
+set $blue #8aadf4
+set $lavender #b7bdf8
+set $text #cad3f5
+set $subtext1 #b8c0e0
+set $subtext0 #a5adcb
+set $overlay2 #939ab7
+set $overlay1 #8087a2
+set $overlay0 #6e738d
+set $surface2 #5b6078
+set $surface1 #494d64
+set $surface0 #363a4f
+set $base #24273a
+set $mantle #1e2030
+set $crust #181926
+
 set $rofi_mode rofi -show drun
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -33,28 +61,42 @@ output * bg ~/dotfiles/wallpaper.png fill
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 # target                 title     bg    text   indicator  border
-#client.focused           $lavender $base $text  $rosewater $lavender
-#client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
-#client.unfocused         $overlay0 $base $text  $rosewater $overlay0
-#client.urgent            $peach    $base $peach $overlay0  $peach
-#client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
-#client.background        $base
+client.focused           $lavender $base $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
 
 # bar
-#bar {
-#  colors {
-#    background         $base
-#    statusline         $text
-#    focused_statusline $text
-#    focused_separator  $base
+set $base #24273a
+set $mauve #c5a0f4
+set $surface2 #5b6078
+set $text #cad3f5
+set $red #ed8796
+set $crust #181926
 
-    # target           border bg        text
-#    focused_workspace  $base  $mauve    $crust
-#    active_workspace   $base  $surface2 $text
-#    inactive_workspace $base  $base     $text
-#    urgent_workspace   $base  $red      $crust
-#  }
-#}
+default_border none
+
+# exec_always waybar -c ~/.config/waybar/config -s ~/.config/waybar/style.css
+
+# exec waybar
+bar {
+# status_command waybar -s ~/.config/waybar/style.css
+ colors {
+    background         #24273a
+    statusline         $text
+    focused_statusline $text
+    focused_separator  $base
+
+#   # target           border bg        text
+    focused_workspace  $base  $mauve    $crust
+    active_workspace   $base  $surface2 $text
+    inactive_workspace $base  $base     $text
+    urgent_workspace   $base  $red      $crust
+  }
+   status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+}
 
 ### Idle configuration
 #
@@ -242,18 +284,22 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
+# bar {
+#    position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#    # When the status_command prints a new line to stdout, swaybar updates.
+#    # The default just shows the current date and time.
+#    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#        inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
+#}
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+for_window [class="Alacritty"] opacity 0.85 blur 5
+default_border pixel 2
+default_floating_border pixel 2
 
 include /etc/sway/config.d/*
